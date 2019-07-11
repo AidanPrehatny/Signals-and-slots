@@ -3,6 +3,7 @@
 
 #include <functional>
 #include <map>
+#include <iostream>
 
 template <typename... Args>
 class Signal {
@@ -12,6 +13,14 @@ class Signal {
         Signal() : currentId(0) {}
 
         Signal(Signal const& other) : currentId(0) {}
+        
+        void print() {}
+
+        template<typename T, typename ... Types>
+        void print(T firstArg, Types ... args) {
+            std::cout << firstArg << "\n";
+            print(args...);
+        }
 
         template <typename T>
         int connect(std::function<void(Args...)> const& slot) const {

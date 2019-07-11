@@ -1,2 +1,8 @@
 **/*.gch
 **/*.out
+src/gucci
+src/CMakeFiles
+**/*.cmake
+src/CMakeCache.txt
+src/Makefile
+.vscode
