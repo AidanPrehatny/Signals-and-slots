@@ -5,7 +5,7 @@
 #include <map>
 #include <iostream>
 
-template <typename... Args>
+template <typename ... Args>
 class Signal {
 
     public:
@@ -14,17 +14,14 @@ class Signal {
 
         Signal(Signal const& other) : currentId(0) {}
         
-        void print() {}
-
-        template<typename T, typename ... Types>
-        void print(T firstArg, Types ... args) {
-            std::cout << firstArg << "\n";
-            print(args...);
+        template <typename... T>
+        void print(T ... values) const {
+            using arr = int[];
+            arr{ 0, (std::cout << values << '\t', 0)... };
         }
 
-        template <typename T>
         int connect(std::function<void(Args...)> const& slot) const {
-            this->slots_.insert(std::make_pair(++this->currentId, slot));
+            this->slots.insert(std::make_pair(++this->currentId, slot));
             return this->currentId;
         }
 
